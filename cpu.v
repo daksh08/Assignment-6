@@ -47,7 +47,7 @@ module cpu (
         .daddr(daddr1)
     );
     
-    dummydecoder2 u3(
+    dummydecoder u3(
         .instr(idata),
         .op(op),
         .rs1(rs1),
@@ -71,7 +71,7 @@ module cpu (
             dwdata <= 0;
             dwe <= 0;
         end else begin 
-            case(op)
+            case(op) //determining type of branch instructions and computing iaddr for each type of branch
                 
                 29 : iaddr = iaddr + {{12{idata[31]}},idata[19:12],idata[20],idata[30:21],1'b0}; //JAL
                 30 : begin iaddr = rv1 + {{20{idata[31]}},idata[31:20]} ; iaddr[0] = 0;  end //JALR
@@ -87,7 +87,7 @@ module cpu (
                      else iaddr <= iaddr + 4; end
                 36 : begin if(rv1 >= rv2) iaddr = iaddr + {{20{idata[31]}},idata[7],idata[30:25],idata[11:8],1'b0};//BGEU
                      else iaddr <= iaddr + 4; end
-                default : iaddr <= iaddr + 4;
+                default : iaddr <= iaddr + 4; //computing iaddr for not a branch statement
             endcase
         end
     end

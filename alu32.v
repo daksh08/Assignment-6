@@ -84,7 +84,7 @@ module alu32(
             28: begin rvout = iaddr + {instr[31:12],{12{1'b0}}}; dwe = 0; end //AIUPC
             29: begin rvout = iaddr +4; dwe = 0; end //JAL
             30: begin rvout = iaddr +4; dwe = 0; end //JALR
-            31: dwe = 0;
+            31: dwe = 0;   //not storing anything for branch instructions 
             32: dwe = 0;
             33: dwe = 0;
             34: dwe = 0;

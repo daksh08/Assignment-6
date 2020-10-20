@@ -19,7 +19,7 @@ module regfile(
     reg [31:0] memory [0:31];
     reg [31:0] rv1, rv2;
     
-    initial begin
+    initial begin  //initializing memory to be 0 
         for (i=0;i<32;i=i+1) begin
             memory[i] = 0;
             end
@@ -30,7 +30,7 @@ module regfile(
         rv2 = memory[rs2];
         case(op)
             19,20,21,22,
-            23: daddr = rv1 + {{20{instr[31]}},instr[31:20]};
+            23: daddr = rv1 + {{20{instr[31]}},instr[31:20]}; //sign extedning the immediate and adding to input
             24,25,
             26: daddr = rv1 + {{20{instr[31]}},instr[31:25],instr[11:7]};
         endcase 
@@ -40,6 +40,6 @@ module regfile(
         if(we == 1 && wdata !== 32'bx) begin
            memory[rd] = wdata;
         end
-        memory[0] = 0;
+        memory[0] = 0;  //first register should always be 0
     end
 endmodule
