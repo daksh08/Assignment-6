@@ -47,7 +47,7 @@ module cpu (
         .daddr(daddr1)
     );
     
-    dummydecoder u3(
+    dummydecoder2 u3(
         .instr(idata),
         .op(op),
         .rs1(rs1),

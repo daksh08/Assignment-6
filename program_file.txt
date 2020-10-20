@@ -2,6 +2,6 @@ cpu.v
 cpu_tb.v
 dmem.v
 imem.v
-dummydecoder.v
+dummydecoder2.v
 regfile.v
 alu32.v
